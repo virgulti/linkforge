@@ -1,10 +1,11 @@
 ---
 id: TASK-3
 title: Redirect con tracking click
-status: To Do
+status: In Progress
 assignee:
   - claude
 created_date: '2026-06-11 11:46'
+updated_date: '2026-06-11 12:18'
 labels:
   - backend
 dependencies:
@@ -23,3 +24,9 @@ Route GET /{code}: redirect 301 + registrazione click (timestamp, referrer, user
 <!-- AC:BEGIN -->
 - [ ] #1 Redirect sotto i 50ms senza attendere il tracking
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+Implementati: migration clicks, modello Click, job RecordClick in coda, RedirectController, route catch-all con constraint. Decisione: 302 invece di 301 (il 301 e' cachato dal browser e ucciderebbe il tracking). IP salvato solo come hash sha256+app key (privacy).
+<!-- SECTION:NOTES:END -->

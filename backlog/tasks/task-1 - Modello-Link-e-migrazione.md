@@ -1,11 +1,11 @@
 ---
 id: TASK-1
 title: Modello Link e migrazione
-status: Done
+status: In Progress
 assignee:
   - aider
 created_date: '2026-06-11 11:45'
-updated_date: '2026-06-11 11:53'
+updated_date: '2026-06-11 12:28'
 labels:
   - backend
   - db
@@ -29,5 +29,5 @@ Tabella links: short_code unico, original_url, user_id nullable, scadenza opzion
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Creati migration, modello Link con HasFactory, LinkFactory e seeder. Indice unico su short_code.
+agy appeso senza output dopo 2h, killato. Torna ad aider ora che ha il modello locale Ollama.
 <!-- SECTION:NOTES:END -->

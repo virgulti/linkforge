@@ -1,10 +1,11 @@
 ---
 id: TASK-2
 title: Servizio generazione short code
-status: To Do
+status: In Progress
 assignee:
   - claude
 created_date: '2026-06-11 11:46'
+updated_date: '2026-06-11 12:10'
 labels:
   - backend
 dependencies:

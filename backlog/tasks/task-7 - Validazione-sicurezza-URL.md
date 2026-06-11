@@ -1,10 +1,11 @@
 ---
 id: TASK-7
 title: Validazione sicurezza URL
-status: To Do
+status: In Progress
 assignee:
   - claude
 created_date: '2026-06-11 11:49'
+updated_date: '2026-06-11 12:20'
 labels:
   - backend
   - security

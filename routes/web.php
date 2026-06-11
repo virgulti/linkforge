@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Web\LinkController;
 use App\Http\Controllers\RedirectController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LinkController::class, 'index'])->name('home');
+Route::post('/', [LinkController::class, 'store'])->name('links.store');
 
 // Catch-all per gli short link: tenere come ultima route.
 Route::get('/{code}', RedirectController::class)

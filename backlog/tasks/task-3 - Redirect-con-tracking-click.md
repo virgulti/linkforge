@@ -1,0 +1,25 @@
+---
+id: TASK-3
+title: Redirect con tracking click
+status: To Do
+assignee:
+  - claude
+created_date: '2026-06-11 11:46'
+labels:
+  - backend
+dependencies:
+  - TASK-2
+priority: high
+ordinal: 3000
+---
+
+## Description
+
+<!-- SECTION:DESCRIPTION:BEGIN -->
+Route GET /{code}: redirect 301 + registrazione click (timestamp, referrer, user agent) su tabella clicks, in coda per non rallentare il redirect.
+<!-- SECTION:DESCRIPTION:END -->
+
+## Acceptance Criteria
+<!-- AC:BEGIN -->
+- [ ] #1 Redirect sotto i 50ms senza attendere il tracking
+<!-- AC:END -->

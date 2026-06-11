@@ -1,11 +1,11 @@
 ---
 id: TASK-3
 title: Redirect con tracking click
-status: In Progress
+status: Done
 assignee:
   - claude
 created_date: '2026-06-11 11:46'
-updated_date: '2026-06-11 12:18'
+updated_date: '2026-06-11 13:27'
 labels:
   - backend
 dependencies:
@@ -22,8 +22,10 @@ Route GET /{code}: redirect 301 + registrazione click (timestamp, referrer, user
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Redirect sotto i 50ms senza attendere il tracking
+- [x] #1 Redirect sotto i 50ms senza attendere il tracking
 <!-- AC:END -->
+
+
 
 ## Implementation Notes
 

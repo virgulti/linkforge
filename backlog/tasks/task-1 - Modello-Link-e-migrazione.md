@@ -1,11 +1,11 @@
 ---
 id: TASK-1
 title: Modello Link e migrazione
-status: In Progress
+status: Done
 assignee:
   - aider
 created_date: '2026-06-11 11:45'
-updated_date: '2026-06-11 12:28'
+updated_date: '2026-06-11 12:35'
 labels:
   - backend
   - db
@@ -29,5 +29,5 @@ Tabella links: short_code unico, original_url, user_id nullable, scadenza opzion
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-agy appeso senza output dopo 2h, killato. Torna ad aider ora che ha il modello locale Ollama.
+aider/qwen ha consegnato; review: fixata factory (unique()->randomLetter generava solo 26 codici possibili e solo lettere -> regexify alfanumerico), rimossi import inutilizzati, aggiunta relazione clicks.
 <!-- SECTION:NOTES:END -->

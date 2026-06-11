@@ -1,10 +1,11 @@
 ---
 id: TASK-4
 title: API REST gestione link
-status: To Do
+status: In Progress
 assignee:
   - antigravity
 created_date: '2026-06-11 11:46'
+updated_date: '2026-06-11 13:34'
 labels:
   - backend
   - api

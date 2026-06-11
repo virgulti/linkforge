@@ -45,7 +45,7 @@ class WebLinkTest extends TestCase
     {
         $user = User::factory()->create();
         $link = Link::factory()->create([
-            'original_url' => 'https://example.com',
+            'original_url' => 'https://unique-test-url-value-should-be-asserted.com',
             'user_id' => $user->id,
         ]);
         
@@ -54,7 +54,7 @@ class WebLinkTest extends TestCase
             ->get('/');
             
         $response->assertStatus(200);
-        $response->assertSee('https://example.com');
+        $response->assertSee('https://unique-test-url-value-should-be-asserted.com');
         $response->assertSee($link->short_code);
     }
 
@@ -95,5 +95,37 @@ class WebLinkTest extends TestCase
             'original_url' => 'https://example.com',
             'short_code' => 'taken',
         ]);
+    }
+
+    public function test_analytics_page_loads_successfully(): void
+    {
+        $user = User::factory()->create();
+        $link = Link::factory()->create([
+            'original_url' => 'https://example-to-test-analytics.com',
+            'user_id' => $user->id,
+            'short_code' => 'testana',
+        ]);
+        
+        $link->clicks()->create([
+            'clicked_at' => now(),
+            'referrer' => 'https://github.com',
+            'user_agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+            'ip_hash' => 'dummyhash',
+        ]);
+
+        $response = $this->get('/links/testana/analytics');
+        
+        $response->assertStatus(200);
+        $response->assertSee('https://example-to-test-analytics.com');
+        $response->assertSee('testana');
+        $response->assertSee('1');
+        $response->assertSee('https://github.com');
+    }
+
+    public function test_analytics_page_returns_404_for_unknown_code(): void
+    {
+        $response = $this->get('/links/nonexistentcode/analytics');
+        
+        $response->assertStatus(404);
     }
 }

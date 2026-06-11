@@ -117,18 +117,19 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Short URL</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Clicks</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($recentLinks as $link)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-w-xs truncate">
-                                            {{ $link->url }}
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-w-xs truncate" title="{{ $link->original_url }}">
+                                            {{ $link->original_url }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600">
                                             <a href="{{ route('links.redirect', $link->short_code) }}" 
                                                target="_blank" 
-                                               class="hover:underline">
+                                               class="hover:underline font-medium">
                                                 {{ route('links.redirect', $link->short_code) }}
                                             </a>
                                         </td>
@@ -145,6 +146,14 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $link->clicks_count }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600">
+                                            <a href="{{ route('links.analytics', $link->short_code) }}" class="hover:underline font-medium flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
+                                                </svg>
+                                                Analytics
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

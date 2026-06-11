@@ -38,4 +38,9 @@ class Link extends Model
                   ->orWhere('expires_at', '>', now());
         });
     }
+
+    public function getIsActiveAttribute(): bool
+    {
+        return $this->expires_at === null || $this->expires_at->isFuture();
+    }
 }

@@ -3,8 +3,9 @@ id: TASK-5
 title: UI creazione link
 status: To Do
 assignee:
-  - antigravity
+  - aider
 created_date: '2026-06-11 11:46'
+updated_date: '2026-06-11 16:10'
 labels:
   - frontend
 dependencies:

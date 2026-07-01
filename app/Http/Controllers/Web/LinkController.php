@@ -27,6 +27,18 @@ class LinkController extends Controller
         return view('welcome', compact('recentLinks'));
     }
 
+    public function clickCounts(Request $request)
+    {
+        $recentLinkIds = $request->session()->get('recent_links', []);
+
+        $counts = Link::withCount('clicks')
+            ->whereIn('id', $recentLinkIds)
+            ->get(['id'])
+            ->pluck('clicks_count', 'id');
+
+        return response()->json($counts);
+    }
+
     public function store(StoreLinkRequest $request)
     {
         try {

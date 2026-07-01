@@ -46,7 +46,7 @@
             <div class="mb-8">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Shorten a New Link</h2>
                 
-                <form action="{{ route('links.store') }}" method="POST" class="space-y-4">
+                <form action="{{ route('web.links.store') }}" method="POST" class="space-y-4">
                     @csrf
                     
                     <!-- URL Input -->
@@ -144,7 +144,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-link-id="{{ $link->id }}" data-clicks-count>
                                             {{ $link->clicks_count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600">
@@ -172,15 +172,47 @@
 
     <script>
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Show a temporary success message or change button text
-                const button = event.target.closest('button');
+            const button = event.target.closest('button');
+            const showCopied = () => {
                 const originalText = button.innerHTML;
                 button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Copied!';
                 setTimeout(() => {
                     button.innerHTML = originalText;
                 }, 2000);
-            });
+            };
+
+            // navigator.clipboard is only available in secure contexts (HTTPS/localhost);
+            // fall back to execCommand for plain HTTP.
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(showCopied);
+                return;
+            }
+
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopied();
+        }
+
+        const clickCountCells = document.querySelectorAll('[data-clicks-count]');
+        if (clickCountCells.length > 0) {
+            setInterval(() => {
+                fetch('{{ route('links.click-counts') }}')
+                    .then(response => response.json())
+                    .then(counts => {
+                        clickCountCells.forEach(cell => {
+                            const linkId = cell.getAttribute('data-link-id');
+                            if (counts[linkId] !== undefined) {
+                                cell.textContent = counts[linkId];
+                            }
+                        });
+                    });
+            }, 1000);
         }
     </script>
 </body>

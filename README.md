@@ -2,6 +2,12 @@
 
 URL shortener with click analytics (referrers, device breakdown, 30-day trend). Laravel 13, SQLite, Pest.
 
+## Screenshots
+
+| Generate a link | Link dashboard | Analytics |
+| --- | --- | --- |
+| ![Generate a link](docs/screenshots/1-generate-link.png) | ![Link dashboard](docs/screenshots/2-link-dashboard.png) | ![Analytics](docs/screenshots/3-analytics.png) |
+
 ## Stack
 
 - Laravel 13 / PHP
